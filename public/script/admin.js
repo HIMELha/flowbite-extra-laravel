@@ -36,3 +36,18 @@ function toggleMenu(button) {
 
     }
 }
+
+function toggleNotification() {
+    const notificationDiv = document.getElementById("notification-dropdown");
+    notificationDiv.classList.toggle('hidden');
+}
+
+function toggleProfile() {
+    const profileDiv = document.getElementById("profileDropdown");
+    profileDiv.classList.toggle('hidden');
+}
+
+function toggleTooltip() {
+    const tooltipDropdown = document.getElementById("tooltipDropdown");
+    tooltipDropdown.classList.toggle('hidden');
+}
