@@ -2,17 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-#sidebarBackdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 10;
-  display: none; /* Initially hidden */
+.flex-center {
+  @apply flex justify-center items-center
 }
 
-#sidebarBackdrop.active {
-  display: block;
+.btn {
+
+}
+
+.btn-outline {
+
+}
+
+.btn-dark{
+  
 }

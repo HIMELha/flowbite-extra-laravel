@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Flowbite Extra Admin Dashboard Template</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     @vite('resources/css/app.css')
     @yield('header')
 </head>
@@ -14,9 +17,7 @@
     @include('admin.includes.header')
     @include('admin.includes.sidebar')
 
-    <div class="fixed inset-0 z-10 bg-gray-900/50 dark:bg-gray-900/90" id="sidebarBackdrop">
-        @yield('contents')
-    </div>
+    @yield('contents')
 
     <script src="{{ asset('script/admin.js') }}"></script>
     @yield('script')
