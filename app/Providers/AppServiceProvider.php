@@ -23,5 +23,6 @@ class AppServiceProvider extends ServiceProvider
         // Load admin.php routes
         Route::middleware('web')
             ->group(base_path('routes/admin.php'));
+            
     }
 }

@@ -4,6 +4,13 @@ const hambgBtn = document.getElementById("toggleSidebarMobileHamburger");
 const sidebar = document.getElementById('sidebar');
 const dashboard = document.getElementById('dashboardContent');
 
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
+
 toggleButton.addEventListener('click', () => {
     if (hambgBtn.classList.contains('hidden')) {
         hambgBtn.classList.remove('hidden');

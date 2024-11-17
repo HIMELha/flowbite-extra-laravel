@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>Flowbite Extra Admin Dashboard Template</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -21,12 +21,13 @@
 <body class="w-full h-screen flex-center flex-col gap-3">
     <h2 class="text-3xl font-medium text-slate-800">Flowbite Extra Admin Dashboard</h2>
 
-    <div class="flex-center gap-4  mt-8">
-        <a href="" class="btn">View demo</a>
+    <div class="flex-center gap-4  mt-16">
+        <a href="{{ route('dashboard.index') }}" class="btn">View demo</a>
         <a href="" class="btn-outline">Buy a license</a>
+        <a href="" class="btn-outline">Give a star</a>
     </div>
 
-    <div class="flex flex-col mt-5 items-center">
+    <div class="flex flex-col mt-2 items-center">
         <span>Extended version of flowbite admin dashboard template</span>
         <p>All rights are reserved by Himel Hasan</p>
     </div>

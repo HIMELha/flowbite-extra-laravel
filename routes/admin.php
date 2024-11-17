@@ -9,9 +9,10 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('dashboard/login', [AuthController::class, 'login'])->name('dashboard.login');
+Route::post('dashboard/verify/login', [AuthController::class, 'verifyLogin'])->name('dashboard.verifyLogin');
 
-// Route::group(['middleware' => AdminRedirect::class], function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+Route::group(['middleware' => AdminRedirect::class, 'prefix' => 'dashboard'], function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
 
     //Users controller
     Route::group(['controller' => UserController::class, 'as' => 'user.'], function () {
@@ -21,6 +22,4 @@ Route::get('dashboard/login', [AuthController::class, 'login'])->name('dashboard
 
 
     Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
-
-    
-// });
+});

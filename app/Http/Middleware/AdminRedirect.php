@@ -14,10 +14,12 @@ class AdminRedirect
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
     public function handle(Request $request, Closure $next): Response
-    {   
-        if(auth()->guard('admin')->check()){
+    {
+        if (auth()->check() && auth()->user()->hasRole('admin')) {
             return $next($request);
         }
-        return redirect()->route('dashboard.login');
+
+        // Redirect to the login route with an error message
+        return redirect()->route('dashboard.login')->with('error', 'You must be logged in as an admin to access this page.');
     }
 }
