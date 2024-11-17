@@ -1,15 +1,3 @@
-@extends('admin.layouts.app')
+## Flowbite Extra Laravel Admin Dashboard
 
-@section('header')
-@endsection
-
-@section('contents')
-<main class="lg:ml-[254px] flex flex-col flex-grow">
-
-</main>
-
-@endsection
-
-@section('script')
-
-@endsection
+Flowbite extra is an open source admin dashboard which will help you to build your laravel project more faster

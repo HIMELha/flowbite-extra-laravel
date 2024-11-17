@@ -58,3 +58,32 @@ function toggleTooltip() {
     const tooltipDropdown = document.getElementById("tooltipDropdown");
     tooltipDropdown.classList.toggle('hidden');
 }
+
+function toggleProfiles(type) {
+    const profileDiv = document.getElementById("profileInfo");
+    const passwordDiv = document.getElementById("passwordDiv");
+    const profileBtn = document.getElementById("profileBtn");
+    const passwordBtn = document.getElementById("passwordBtn");
+
+    if (type === 'profile') {
+        // Toggle profile view
+        profileDiv.classList.remove('hidden');
+        passwordDiv.classList.add('hidden');
+
+        // Update button styles
+        profileBtn.classList.remove('btn-outline');
+        profileBtn.classList.add('btn');
+        passwordBtn.classList.remove('btn');
+        passwordBtn.classList.add('btn-outline');
+    } else if (type === 'password') {
+        // Toggle password view
+        passwordDiv.classList.remove('hidden');
+        profileDiv.classList.add('hidden');
+
+        // Update button styles
+        passwordBtn.classList.remove('btn-outline');
+        passwordBtn.classList.add('btn');
+        profileBtn.classList.remove('btn');
+        profileBtn.classList.add('btn-outline');
+    }
+}

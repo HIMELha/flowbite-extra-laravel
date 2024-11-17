@@ -149,25 +149,14 @@
                             </li>
                         </ul>
                     </li>
+                    
                     <li>
-                        <button type="button" onclick="toggleMenu(this)"
-                            class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">
+                        <a href="{{ route('settings.index') }}"
+                            class="flex items-center p-2 text-base text-gray-900 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700   dark:bg-gray-700 ">
                             <i class="fa-solid fa-user-shield icon"></i>
-                            <span class="flex-1 ml-3 text-left whitespace-nowrap" sidebar-toggle-item>Roles & Permission</span>
-                            <i class="fa-solid fa-chevron-up text-[14px] transition-all rotate-180 px-1.5"></i>
-                        </button>
-                        <ul id="dropdown-playground" class="space-y-2 py-2 hidden ">
-                            <li>
-                                <a href=""
-                                    class="text-base text-gray-900 rounded-lg flex items-center p-2 group hover:bg-gray-100 transition duration-75 pl-11 dark:text-gray-200 dark:hover:bg-gray-700 bg-gray-100 dark:bg-gray-700 ">Stacked</a>
-                            </li>
-                            <li>
-                                <a href=""
-                                    class="text-base text-gray-900 rounded-lg flex items-center p-2 group hover:bg-gray-100 transition duration-75 pl-11 dark:text-gray-200 dark:hover:bg-gray-700  bg-gray-100 dark:bg-gray-700 ">Sidebar</a>
-                            </li>
-                        </ul>
+                            <span class="ml-3" sidebar-toggle-item>Roles & Permission</span>
+                        </a>
                     </li>
-
                     <li>
                         <a href="{{ route('settings.index') }}"
                             class="flex items-center p-2 text-base text-gray-900 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700   dark:bg-gray-700 ">

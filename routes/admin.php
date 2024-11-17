@@ -16,6 +16,7 @@ Route::group(['middleware' => AdminRedirect::class, 'prefix' => 'dashboard'], fu
 
 Route::group(['middleware' => AdminAuth::class, 'prefix' => 'dashboard'], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
+    Route::get('/profile', [SettingsController::class, 'profile'])->name('dashboard.profile');
     Route::get('/logout', [AuthController::class, 'logout'])->name('dashboard.logout');
 
 
