@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class AdminRedirect
+class AdminAuth
 {
     /**
      * Handle an incoming request.
@@ -16,10 +16,10 @@ class AdminRedirect
     public function handle(Request $request, Closure $next): Response
     {
         if (auth()->check() && auth()->user()->hasRole('admin')) {
-            // Redirect to the login route with an error message
-            return redirect()->route('dashboard.index')->with('error', "You've already logged in");
+            return $next($request);
         }
 
-        return $next($request);
+        // Redirect to the login route with an error message
+        return redirect()->route('dashboard.login')->with('error', 'You must be logged in as an admin to access this page.');
     }
 }

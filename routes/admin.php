@@ -4,15 +4,20 @@ use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Middleware\AdminAuth;
 use App\Http\Middleware\AdminRedirect;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('dashboard/login', [AuthController::class, 'login'])->name('dashboard.login');
-Route::post('dashboard/verify/login', [AuthController::class, 'verifyLogin'])->name('dashboard.verifyLogin');
-
 Route::group(['middleware' => AdminRedirect::class, 'prefix' => 'dashboard'], function () {
+    Route::get('login', [AuthController::class, 'login'])->name('dashboard.login');
+    Route::post('verify/login', [AuthController::class, 'verifyLogin'])->name('dashboard.verifyLogin');
+});
+
+Route::group(['middleware' => AdminAuth::class, 'prefix' => 'dashboard'], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
+    Route::get('/logout', [AuthController::class, 'logout'])->name('dashboard.logout');
+
 
     //Users controller
     Route::group(['controller' => UserController::class, 'as' => 'user.'], function () {

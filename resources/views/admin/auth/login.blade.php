@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{{ asset('style/notify.min.css') }}">
     @vite('resources/css/app.css')
 </head>
 
@@ -58,7 +59,9 @@
         </div>
     </div>
     <script src="{{ asset('script/jquery.js') }}"></script>
+    <script src="{{ asset('script/notify.js') }}"></script>
     <script src="{{ asset('script/helpers.js') }}"></script>
+
     <script>
         $(document).ready(function() {
 
@@ -71,18 +74,23 @@
             $('#LoginForm').on('submit', function(e) {
                 e.preventDefault();
                 let formData = $(this).serialize();
-                console.log(formData)
+
                 $.ajax({
                     url: "{{ route('dashboard.verifyLogin') }}",
                     type: 'POST',
                     data: formData,
                     success: function(response) {
                         if (response.status == 'success') {
-                            
+                            notyf.success(response.data.message);
+                            redirect(response.data.redirect);
                         }
                     },
                     error: function(xhr, status, error) {
-                        console.log(error);
+                        let errors = xhr.responseJSON;
+                        
+                        if (errors.status == 'error') {
+                            notyf.error(errors.data.error);
+                        }
                     }
                 });
             });
