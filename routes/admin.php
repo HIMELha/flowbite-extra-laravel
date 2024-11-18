@@ -16,7 +16,6 @@ Route::group(['middleware' => AdminRedirect::class, 'prefix' => 'dashboard'], fu
 
 Route::group(['middleware' => AdminAuth::class, 'prefix' => 'dashboard'], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
-    Route::get('/profile', [SettingsController::class, 'profile'])->name('dashboard.profile');
     Route::get('/logout', [AuthController::class, 'logout'])->name('dashboard.logout');
 
 
@@ -28,4 +27,6 @@ Route::group(['middleware' => AdminAuth::class, 'prefix' => 'dashboard'], functi
 
 
     Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
+    Route::get('/profile', [SettingsController::class, 'profile'])->name('dashboard.profile');
+    Route::post('/profile/update', [SettingsController::class, 'updateProfile'])->name('dashboard.updateProfile');
 });
