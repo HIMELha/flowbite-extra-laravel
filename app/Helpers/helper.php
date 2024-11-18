@@ -1,6 +1,7 @@
-<?php 
+<?php
 
-function responseJson($array, $status, $statusCode){
+function responseJson($array, $status, $statusCode)
+{
     return response()->json([
         'status' => $status,
         'data' => $array
@@ -18,4 +19,19 @@ function saveImage($image, $filePath)
     $image->move(public_path($filePath), $imageName);
 
     return $filePath . '/' . $imageName;
+}
+
+function deleteOldImage($image)
+{
+    if ($image && file_exists(public_path($image))) {
+        try {
+            unlink(public_path($image));
+            return true;
+        } catch (Exception $e) {
+            \Log::error("Error deleting image: " . $e->getMessage());
+            return false;
+        }
+    }
+
+    return false;
 }

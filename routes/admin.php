@@ -29,4 +29,6 @@ Route::group(['middleware' => AdminAuth::class, 'prefix' => 'dashboard'], functi
     Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
     Route::get('/profile', [SettingsController::class, 'profile'])->name('dashboard.profile');
     Route::post('/profile/update', [SettingsController::class, 'updateProfile'])->name('dashboard.updateProfile');
+    Route::post('/password/update', [SettingsController::class, 'updatePassword'])->name('dashboard.updatePassword');
+    
 });
