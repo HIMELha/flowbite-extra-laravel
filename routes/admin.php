@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\PagesController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Middleware\AdminAuth;
@@ -16,13 +17,22 @@ Route::group(['middleware' => AdminRedirect::class, 'prefix' => 'dashboard'], fu
 
 Route::group(['middleware' => AdminAuth::class, 'prefix' => 'dashboard'], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
-    Route::get('/logout', [AuthController::class, 'logout'])->name('dashboard.logout');
+    Route::get('logout', [AuthController::class, 'logout'])->name('dashboard.logout');
 
 
     //Users controller
-    Route::group(['controller' => UserController::class, 'as' => 'user.'], function () {
-        Route::get('users', 'index')->name('index');
-        Route::get('user/details/{id]', 'show')->name('show');
+    Route::group(['controller' => UserController::class, 'as' => 'user.', 'prefix' => 'users'], function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('details/{id]', 'show')->name('show');
+    });
+
+    //Pages controller
+    Route::group(['controller' => PagesController::class, 'as' => 'pages.', 'prefix' => 'pages'], function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('pricing', 'pricing')->name('pricing');
+        Route::get('maintenance', 'maintenance')->name('maintenance');
+        Route::get('404', 'fourzerofour')->name('fourzerofour');
+        Route::get('500', 'fivezerozero')->name('fivezerozero');
     });
 
 
