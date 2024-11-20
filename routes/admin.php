@@ -20,13 +20,11 @@ Route::group(['middleware' => AdminAuth::class, 'prefix' => 'dashboard'], functi
     Route::get('logout', [AuthController::class, 'logout'])->name('dashboard.logout');
 
 
-    //Users controller
     Route::group(['controller' => UserController::class, 'as' => 'user.', 'prefix' => 'users'], function () {
         Route::get('/', 'index')->name('index');
         Route::get('details/{id]', 'show')->name('show');
     });
 
-    //Pages controller
     Route::group(['controller' => PagesController::class, 'as' => 'pages.', 'prefix' => 'pages'], function () {
         Route::get('/', 'index')->name('index');
         Route::get('pricing', 'pricing')->name('pricing');

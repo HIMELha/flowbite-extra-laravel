@@ -183,9 +183,14 @@
                                                 </div>
                                             </td>
                                             <td class="flex items-center p-4 mr-12 space-x-6 whitespace-nowrap">
-                                                <img class="w-10 h-10 rounded-full"
-                                                    src="{{ asset('images/users/' . $user->avatar) }}"
-                                                    alt="{{ $user->name }} avatar">
+                                                @if (file_exists(public_path('uploads/profiles/' . $user->profile)))
+                                                    <img src="{{ asset('uploads/profiles/' . $user->profile) }}"
+                                                        alt="Profile Image">
+                                                @else <img class="w-10 h-10 rounded-full"
+                                                        src="{{ asset('images/user.png') }}"
+                                                        alt="{{ $user->name }} avatar">
+                                                
+                                                @endif
                                                 <div class="text-sm font-normal text-gray-500 dark:text-gray-400">
                                                     <div class="text-base font-semibold text-gray-900 dark:text-white">
                                                         {{ $user->name }}</div>
@@ -220,7 +225,6 @@
                                             <td class="p-4 space-x-2 whitespace-nowrap">
                                                 <button type="button"
                                                     class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
-
                                                     Edit
                                                 </button>
                                                 <button type="button"
@@ -247,10 +251,10 @@
                 </div>
             </div>
         </div>
-       
-            <div class="px-3 py-2">
-                {{ $users->links() }}
-            </div>
+
+        <div class="px-3 py-2">
+            {{ $users->links() }}
+        </div>
 
         <!-- Edit User Modal -->
         <div class="fixed left-0 right-0 z-50 items-center justify-center hidden overflow-x-hidden overflow-y-auto top-4 md:inset-0 h-modal sm:h-full"
