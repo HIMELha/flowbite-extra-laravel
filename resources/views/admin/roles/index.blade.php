@@ -129,9 +129,6 @@
                                                     <span class="badge badge-blue mb-1">{{ $roles->name }}</span>
                                                 @empty
                                                     <span class="badge badge-green">User</span>
-                                                    <span class="badge badge-green">User</span>
-                                                    <span class="badge badge-green">User</span>
-                                                    <span class="badge badge-green">User</span>
                                                 @endforelse
                                             </td>
                                             
