@@ -151,7 +151,7 @@
                     </li>
                     
                     <li>
-                        <a href="{{ route('settings.index') }}"
+                        <a href="{{ route('roles.index') }}"
                             class="flex items-center p-2 text-base text-gray-900 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700   dark:bg-gray-700 ">
                             <i class="fa-solid fa-user-shield icon"></i>
                             <span class="ml-3" sidebar-toggle-item>Roles & Permission</span>

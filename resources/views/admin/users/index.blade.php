@@ -8,7 +8,7 @@
 
 
         <div
-            class=" p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5 dark:bg-gray-800 dark:border-gray-700">
+            class=" p-4 bg-white block sm:flex items-center justify-between  lg:mt-1.5 dark:bg-gray-800 ">
             <div class="w-full mb-1 mt-16">
                 <div class="mb-4">
                     <nav class="flex mb-5" aria-label="Breadcrumb">
@@ -55,15 +55,19 @@
                 </div>
                 <div class="flex justify-between items-center">
                     <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">All users</h1>
-                    <form class="flex gap-1" action="{{ route('user.index') }}" method="GET">
-                        
-                        <div class="relative mt-1 lg:w-64 xl:w-96">
+                    <form action="{{ route('user.index') }}" method="GET">
+
+                        <div class="relative lg:w-64 xl:w-96">
                             <input type="text" name="search" id=""
-                                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                placeholder="Search for users">
+                                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full px-2.5 py-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                placeholder="Search for users" value="{{ $search }}">
+
+                            <button type="submit"
+                                class="absolute right-0 bottom-0 top-0 w-10 h-full  text-base font-medium text-center text-white bg-slate-900 rounded hover:bg-gray-800 focus:ring-4 focus:ring-blue-300"><i
+                                    class="fa-solid fa-magnifying-glass"></i></button>
                         </div>
 
-                        <button type="submit" class="btn !py-1">Submit</button>
+
                     </form>
                 </div>
             </div>
@@ -112,8 +116,8 @@
                                     @foreach ($users as $user)
                                         <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
 
-                                            <td class="flex items-center p-4 mr-12 space-x-6 whitespace-nowrap">
-                                                @if (file_exists(public_path($user->profile)))
+                                            <td class="flex items-center p-2 mr-12 space-x-6 whitespace-nowrap">
+                                                @if (fileExists($user->profile))
                                                     <img src="{{ asset($user->profile) }}" alt="Profile Image"
                                                         class="w-10 h-10 rounded-full">
                                                 @else
@@ -128,19 +132,19 @@
                                                 </div>
                                             </td>
                                             <td
-                                                class="max-w-sm p-4 overflow-hidden text-base font-normal text-gray-500 truncate xl:max-w-xs dark:text-gray-400">
+                                                class="max-w-sm p-2 overflow-hidden text-base font-normal text-gray-500 truncate xl:max-w-xs dark:text-gray-400">
                                                 {{ $user->description ?? 'No description available' }}
                                             </td>
                                             <td
-                                                class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                class="p-2 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                                 {{ $user->role ?? 'N/A' }}
                                             </td>
                                             <td
-                                                class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                class="p-2 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                                 {{-- {{ $user->created_at->format('d M Y') }} --}}
                                             </td>
                                             <td
-                                                class="p-4 text-base font-normal text-gray-900 whitespace-nowrap dark:text-white">
+                                                class="p-2 text-base font-normal text-gray-900 whitespace-nowrap dark:text-white">
                                                 <div class="flex items-center">
                                                     @if ($user->is_active)
                                                         <div class="h-2.5 w-2.5 rounded-full bg-green-400 mr-2"></div>

@@ -35,3 +35,13 @@ function deleteOldImage($image)
 
     return false;
 }
+
+
+function fileExists($filePath)
+{
+    if (file_exists(public_path($filePath))) {
+        return true;
+    } else {
+        return false;
+    }
+}

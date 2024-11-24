@@ -5,7 +5,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PagesController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\RolesController;
+use App\Http\Controllers\Admin\RolesController;
 use App\Http\Middleware\AdminAuth;
 use App\Http\Middleware\AdminRedirect;
 use Illuminate\Support\Facades\Route;
@@ -38,6 +38,7 @@ Route::group(['middleware' => AdminAuth::class, 'prefix' => 'dashboard'], functi
 
     Route::group(['controller' => RolesController::class, 'as' => 'roles.', 'prefix' => 'roles'], function () {
         Route::get('/', 'index')->name('index');
+        Route::get('/edit/{id}', 'edit')->name('edit');
     });
 
 

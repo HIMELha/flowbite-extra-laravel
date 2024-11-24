@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
@@ -12,14 +13,19 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $users = User::latest();
-
-        if($request->has('search')){
-            $users->where('name', '%'. 'Like' .'%', $request->search);
+        $search = ''; 
+        if ($request->has('search') && $request->search) {
+            $search = $request->search;
+            $users->where(function ($query) use ($search) {
+                $query->orWhere('name', 'LIKE', '%' .  $search . '%')
+                    ->orWhere('email', 'LIKE', '%' . $search . '%');
+            });
         }
 
-        $users = $users->whereNot('id', auth()->user()->id)->latest()->paginate(12);
 
-        return view('admin.users.index', compact('users'));
+        $users = $users->whereNot('id', Auth::user()->id)->latest()->paginate(12);
+
+        return view('admin.users.index', compact('users', 'search'));
     }
 
     public function show($id)
