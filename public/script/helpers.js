@@ -9,3 +9,5 @@ const notyf = new Notyf({
         y: 'top',
     }
 });
+
+const loader = `<div class="w-6 h-6 border-2 border-dashed rounded-full animate-spin border-white"></div>`;

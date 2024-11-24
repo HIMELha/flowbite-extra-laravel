@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\User; 
+use App\Models\User;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+
 
 class RolesController extends Controller
 {
@@ -27,14 +28,51 @@ class RolesController extends Controller
         return view('admin.roles.index', compact('users', 'search'));
     }
 
-    public function edit($id){
+    public function edit($id)
+    {
         $user = User::find($id);
 
-        if(!$user){
+        if (!$user) {
             session()->flash('error', "User not found");
             return redirect()->back();
         }
 
-        return view('admin.roles.edit', compact('user'));
+        $roles = Role::all();
+
+        return view('admin.roles.edit', compact('user', 'roles'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $user = User::find($id);
+
+        if (!$user) {
+            return responseJson([
+                'error' => 'User not found',
+                'redirect' => route('roles.index')
+            ], 'error', 200);
+        }
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'roles' => 'required|array',
+            'roles.*' => 'exists:roles,name',
+        ]);
+
+        if ($validator->fails()) {
+            return responseJson([
+                'errors' => $validator->errors()
+            ], 'error', 422);
+        };
+
+        $user->name = $request->name;
+        $user->syncRoles($request->roles);
+
+        $user->save();
+
+        return responseJson([
+            'message' => "user roles updated successfully",
+            'redirect' => route('roles.index')
+        ], 'success', 200);
     }
 }

@@ -81,9 +81,7 @@
                     type: 'POST',
                     beforeSend: function() {
                         submitBtn.prop('disabled', true);
-                        submitBtn.html(
-                            `<div class="w-6 h-6 border-2 border-dashed rounded-full animate-spin border-white"></div>`
-                        )
+                        submitBtn.html(loader)
                     },
                     data: formData,
                     success: function(response) {

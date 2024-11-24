@@ -39,6 +39,7 @@ Route::group(['middleware' => AdminAuth::class, 'prefix' => 'dashboard'], functi
     Route::group(['controller' => RolesController::class, 'as' => 'roles.', 'prefix' => 'roles'], function () {
         Route::get('/', 'index')->name('index');
         Route::get('/edit/{id}', 'edit')->name('edit');
+        Route::post('/update/{id}', 'update')->name('update');
     });
 
 
