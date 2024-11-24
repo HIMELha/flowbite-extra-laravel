@@ -38,8 +38,7 @@
                 <div>
                     <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
                         password</label>
-                    <input type="password" name="password" id="password" value="webhimel032@gmail.com"
-                        placeholder="••••••••"
+                    <input type="password" name="password" id="password" value="12345678" placeholder=""
                         class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 </div>
                 <div class="flex items-start">
@@ -53,7 +52,7 @@
                     <a href="#" class="ml-auto text-sm text-blue-700 hover:underline dark:text-blue-500">Lost
                         Password?</a>
                 </div>
-                <button type="submit" class="btn-sky">Login
+                <button type="submit" class="btn-sky w-full flex-center">Login
                     to your account</button>
 
             </form>
@@ -75,12 +74,22 @@
             $('#LoginForm').on('submit', function(e) {
                 e.preventDefault();
                 let formData = $(this).serialize();
+                var submitBtn = $('.btn-sky');
 
                 $.ajax({
                     url: "{{ route('dashboard.verifyLogin') }}",
                     type: 'POST',
+                    beforeSend: function() {
+                        submitBtn.prop('disabled', true);
+                        submitBtn.html(
+                            `<div class="w-6 h-6 border-2 border-dashed rounded-full animate-spin border-white"></div>`
+                        )
+                    },
                     data: formData,
                     success: function(response) {
+                        submitBtn.prop('disabled', false);
+                        submitBtn.html(`Login to your account`)
+
                         if (response.status == 'success') {
                             notyf.success(response.data.message);
 
@@ -90,6 +99,8 @@
                         }
                     },
                     error: function(xhr, status, error) {
+                        submitBtn.prop('disabled', false);
+                        submitBtn.html(`Login to your account`)
                         let errors = xhr.responseJSON;
 
                         if (errors.status == 'error') {
