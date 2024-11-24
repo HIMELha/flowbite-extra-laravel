@@ -50,7 +50,7 @@ Ensure you have the following installed:
    ```bash
     php artisan serve
 
-    npm run build
+    npm run dev
 
 
 ## License
