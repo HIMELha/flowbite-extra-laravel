@@ -75,4 +75,24 @@ class RolesController extends Controller
             'redirect' => route('roles.index')
         ], 'success', 200);
     }
+
+    public function permissions(Request $request)
+    {
+        $roles = Role::latest();
+        $search = '';
+        if ($request->has('search') && $request->search) {
+            $search = $request->search;
+            $roles->where(function ($query) use ($search) {
+                $query->orWhere('name', 'LIKE', '%' .  $search . '%')
+                    ->orWhere('email', 'LIKE', '%' . $search . '%');
+            });
+        }
+
+        $roles = $roles->latest()->paginate(12);
+        return view('admin.roles.permission', compact('roles', 'search'));
+    }
+
+    public function editPermission($id){
+        
+    }
 }

@@ -40,6 +40,9 @@ Route::group(['middleware' => AdminAuth::class, 'prefix' => 'dashboard'], functi
         Route::get('/', 'index')->name('index');
         Route::get('/edit/{id}', 'edit')->name('edit');
         Route::post('/update/{id}', 'update')->name('update');
+        Route::get('/permissions', 'permissions')->name('permissions');
+        Route::get('/edit-permission/{id}', 'editPermission')->name('editPermission');
+        Route::get('/edit-permission/{id}', 'editPermission')->name('updatePermission');
     });
 
 

@@ -62,14 +62,14 @@
                             <div class="col-span-6 sm:col-span-3">
                                 <label for="name"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
-                                <input type="text" name="name" value="Bonnie" id="name"
+                                <input type="text" name="name" value="{{ $user->name }}" id="name"
                                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-sky-500 dark:focus:border-sky-500"
                                     placeholder="Bonnie">
                             </div>
                             <div class="col-span-6 sm:col-span-3 w-full">
                                 <label for="roles"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select role</label>
-                                <select name="roles[]" class="w-full" id="roles_select" multiple>
+                                <select name="roles[]" class="w-full" id="roles" multiple>
                                     @forelse ($roles as $role)
                                         <option value="{{ $role->name }}"
                                             {{ $user->roles->contains('name', $role->name) ? 'selected' : '' }}>
@@ -109,7 +109,7 @@
     <script>
         $(document).ready(function() {
 
-            $('#roles_select').select2();
+            $('#roles').select2();
 
             $('#RoleUpdateForm').on('submit', function(e) {
                 e.preventDefault();
