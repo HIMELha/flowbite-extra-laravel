@@ -33,7 +33,7 @@
                                             clip-rule="evenodd"></path>
                                     </svg>
                                     <a href="#"
-                                        class="ml-1 text-gray-700 hover:text-primary-600 md:ml-2 dark:text-gray-300 dark:hover:text-white">Users</a>
+                                        class="ml-1 text-gray-700 hover:text-primary-600 md:ml-2 dark:text-gray-300 dark:hover:text-white">Permission</a>
                                 </div>
                             </li>
                             <li>
@@ -60,7 +60,7 @@
                         <div class="relative lg:w-64 xl:w-96">
                             <input type="text" name="search" id=""
                                 class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full px-2.5 py-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                placeholder="Search for users" value="{{ $search }}">
+                                placeholder="Search for permission" value="{{ $search }}">
 
                             <button type="submit"
                                 class="absolute right-0 bottom-0 top-0 w-10 h-full  text-base font-medium text-center text-white bg-slate-900 rounded hover:bg-gray-800 focus:ring-4 focus:ring-blue-300"><i
@@ -69,6 +69,8 @@
 
 
                     </form>
+
+                    <a href="{{ route('roles.createPermission') }} " class="btn !py-1.5">New permission</a>
                 </div>
             </div>
 
@@ -86,11 +88,7 @@
                                 <tr>
                                     <th scope="col"
                                         class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
-                                        Role name
-                                    </th>
-                                    <th scope="col"
-                                        class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
-                                        Permissions
+                                        Permission name
                                     </th>
 
                                     <th scope="col"
@@ -100,28 +98,25 @@
 
                                 </tr>
                             </thead>
-                            @if ($roles->isNotEmpty())
-                                @foreach ($roles as $role)
+                            @if ($permissions->isNotEmpty())
+                                @foreach ($permissions as $permission)
                                     <tbody class="bg-white dark:bg-gray-800">
                                         <tr>
                                             <td
                                                 class="px-4 py-2 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">
 
-                                                {{ $role->name }}
+                                                {{ $permission->name }}
                                             </td>
 
-                                            <td class="p-2  text-sm font-semibold text-gray-900  dark:text-white">
-                                                @forelse ($role->permissions as $permission)
-                                                    <span class="badge badge-blue mb-1">{{ $permission->name }}</span>
-                                                @empty
-                                                    <span class="badge badge-green">Default</span>
-                                                @endforelse
+                                            
 
-                                            </td>
+                                            <td class="p-2 flex gap-3 whitespace-nowrap">
+                                                <a href="{{ route('roles.editPermission', $permission->id) }}" class="btn-sm">
+                                                    <i class="fa-solid fa-pen-to-square"></i>
+                                                </a>
 
-                                            <td class="p-2 whitespace-nowrap">
-                                                <a href="{{ route('roles.updatePermission', $role->id) }}" class="btn-sm">
-                                                    <i class="fa-solid fa-user-pen"></i>
+                                                <a href="{{ route('roles.deletePermission', $permission->id) }}" class="btn-sm !bg-red-500">
+                                                    <i class="fa-regular fa-trash-can"></i>
                                                 </a>
                                             </td>
                                         </tr>
@@ -132,7 +127,7 @@
                                 <tbody>
                                     <tr>
                                         <td colspan="5" class="p-4 text-center text-gray-500 dark:text-gray-400">
-                                            No users found.
+                                            No permissions found.
                                         </td>
                                     </tr>
                                 </tbody>
@@ -144,7 +139,7 @@
         </div>
 
         <div class="px-4 py-2">
-            {{ $roles->links() }}
+            {{ $permissions->links() }}
         </div>
 
 
