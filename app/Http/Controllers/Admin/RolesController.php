@@ -91,7 +91,8 @@ class RolesController extends Controller
         return view('admin.roles.permission', compact('permissions', 'search'));
     }
 
-    public function createPermission() {
+    public function createPermission()
+    {
         return view('admin.roles.permission_create');
     }
 
@@ -118,7 +119,8 @@ class RolesController extends Controller
     }
 
 
-    public function editPermission($id){
+    public function editPermission($id)
+    {
         $permission = Permission::find($id);
 
         if (!$permission) {
@@ -127,7 +129,6 @@ class RolesController extends Controller
         }
 
         return view('admin.roles.permission_edit', compact('permission'));
-        
     }
 
     public function updatePermission(Request $request, $id)
@@ -175,5 +176,67 @@ class RolesController extends Controller
         return redirect()->back();
     }
 
+    public function roles(Request $request)
+    {
+        $roles = Role::latest();
+        $search = '';
+        if ($request->has('search') && $request->search) {
+            $search = $request->search;
+            $roles->where(function ($query) use ($search) {
+                $query->orWhere('name', 'LIKE', '%' .  $search . '%');
+            });
+        }
 
+        $roles = $roles->latest()->paginate(12);
+        return view('admin.roles.roles', compact('roles', 'search'));
+    }
+
+
+    public function editRole($id)
+    {
+        $role = Role::find($id);
+
+        if (!$role) {
+            session()->flash('error', "Permission not found");
+            return redirect()->back();
+        }
+
+        $permissions = Permission::all();
+
+        return view('admin.roles.role_edit', compact('role', 'permissions'));
+    }
+
+    public function updateRole(Request $request, $id)
+    {
+        $role = Role::find($id);
+
+        if (!$role) {
+            return responseJson([
+                'error' => 'Role not found',
+                'redirect' => route('roles.roles'),
+            ], 'error', 404);
+        }
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|unique:roles,name,' . $id . '|max:255',
+            'permissions' => 'required|array',
+            'permissions.*' => 'exists:permissions,name',
+        ]);
+
+        if ($validator->fails()) {
+            return responseJson([
+                'errors' => $validator->errors(),
+            ], 'error', 422);
+        }
+
+        $role->name = $request->name;
+        $role->save();
+
+        $role->syncPermissions($request->permissions);
+
+        return responseJson([
+            'message' => 'Role updated successfully',
+            'redirect' => route('roles.roles'),
+        ], 'success', 200);
+    }
 }

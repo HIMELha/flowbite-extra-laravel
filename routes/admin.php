@@ -46,6 +46,9 @@ Route::group(['middleware' => AdminAuth::class, 'prefix' => 'dashboard'], functi
         Route::get('/permission/edit/{id}', 'editPermission')->name('editPermission');
         Route::post('/permission/update/{id}', 'updatePermission')->name('updatePermission');
         Route::get('/permission/delete/{id}', 'deletePermission')->name('deletePermission');
+        Route::get('/roles', 'roles')->name('roles');
+        Route::get('/role/edit/{id}', 'editRole')->name('editRole');
+        Route::post('/role/update/{id}', 'updateRole')->name('updateRole');
     });
 
 
