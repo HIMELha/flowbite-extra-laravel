@@ -1,5 +1,8 @@
 <?php
 
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+
 function responseJson($array, $status, $statusCode)
 {
     return response()->json([
@@ -44,4 +47,28 @@ function fileExists($filePath)
     } else {
         return false;
     }
+}
+
+
+function hasAccess($roles, $permissions)
+{
+    if (!$roles || empty($permissions)) {
+        return false;
+    }
+
+    $roles = is_array($roles) ? $roles : $roles->pluck('name')->toArray();
+
+    $permissions = is_array($permissions) ? $permissions : [$permissions];
+
+    $rolePermissions = Permission::whereHas('roles', function ($query) use ($roles) {
+        $query->whereIn('name', $roles);
+    })->pluck('name')->toArray();
+
+    foreach ($permissions as $permission) {
+        if (in_array($permission, $rolePermissions)) {
+            return true;
+        }
+    }
+
+    return false;
 }

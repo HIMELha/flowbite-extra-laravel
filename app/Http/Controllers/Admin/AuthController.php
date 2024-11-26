@@ -35,7 +35,7 @@ class AuthController extends Controller
             ], 'error', 401);
         }
 
-        if (auth()->user()->hasRole('admin')) {
+        if (Auth::user()->hasRole(['super_admin', 'admin', 'moderator', 'customer_support', 'finance_manager', 'manager'])) {
             return responseJson([
                 'message' => 'Login attempt success',
                 'redirect' => route('dashboard.index')

@@ -21,14 +21,14 @@ Route::group(['middleware' => AdminAuth::class, 'prefix' => 'dashboard'], functi
     Route::get('logout', [AuthController::class, 'logout'])->name('dashboard.logout');
 
 
-    Route::group(['controller' => UserController::class, 'as' => 'user.', 'prefix' => 'users'], function () {
+    Route::group(['controller' => UserController::class, 'as' => 'user.', 'prefix' => 'users', 'middleware' => ['permission:manage_users']], function () {
         Route::get('/', 'index')->name('index');
         Route::get('details/{id}', 'show')->name('show');
         Route::post('update/{id}', 'update')->name('update');
         Route::get('delete/{id}', 'delete')->name('delete');
     });
 
-    Route::group(['controller' => PagesController::class, 'as' => 'pages.', 'prefix' => 'pages'], function () {
+    Route::group(['controller' => PagesController::class, 'as' => 'pages.', 'prefix' => 'pages', 'middleware' => ['permission:manage_pages']], function () {
         Route::get('/', 'index')->name('index');
         Route::get('pricing', 'pricing')->name('pricing');
         Route::get('maintenance', 'maintenance')->name('maintenance');
@@ -36,7 +36,7 @@ Route::group(['middleware' => AdminAuth::class, 'prefix' => 'dashboard'], functi
         Route::get('500', 'fivezerozero')->name('fivezerozero');
     });
 
-    Route::group(['controller' => RolesController::class, 'as' => 'roles.', 'prefix' => 'roles'], function () {
+    Route::group(['controller' => RolesController::class, 'as' => 'roles.', 'prefix' => 'roles', 'middleware' => ['permission:manage_roles']], function () {
         Route::get('/', 'index')->name('index');
         Route::get('/edit/{id}', 'edit')->name('edit');
         Route::post('/update/{id}', 'update')->name('update');
@@ -51,10 +51,11 @@ Route::group(['middleware' => AdminAuth::class, 'prefix' => 'dashboard'], functi
         Route::post('/role/update/{id}', 'updateRole')->name('updateRole');
     });
 
+    Route::group(['middleware' => ['role:super_admin']], function () {
+        Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
+    });
 
-    Route::get('/settings',               [SettingsController::class, 'index'])->name('settings.index');
-    Route::get('/profile',                [SettingsController::class, 'profile'])->name('dashboard.profile');
-    Route::post('/profile/update',        [SettingsController::class, 'updateProfile'])->name('dashboard.updateProfile');
-    Route::post('/password/update',       [SettingsController::class, 'updatePassword'])->name('dashboard.updatePassword');
-    
+    Route::get('/profile', [SettingsController::class, 'profile'])->name('dashboard.profile');
+    Route::post('/profile/update', [SettingsController::class, 'updateProfile'])->name('dashboard.updateProfile');
+    Route::post('/password/update', [SettingsController::class, 'updatePassword'])->name('dashboard.updatePassword');
 });

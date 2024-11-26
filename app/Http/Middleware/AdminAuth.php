@@ -15,7 +15,7 @@ class AdminAuth
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (auth()->check() && auth()->user()->hasRole('admin')) {
+        if (auth()->check() && auth()->user()->hasRole(['super_admin', 'admin', 'moderator', 'customer_support', 'finance_manager', 'manager'])) {
             return $next($request);
         }
 

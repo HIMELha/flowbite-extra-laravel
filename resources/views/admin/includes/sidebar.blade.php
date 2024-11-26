@@ -35,26 +35,30 @@
                             <span class="ml-3" sidebar-toggle-item>Dashboard</span>
                         </a>
                     </li>
-                    <li>
-                        <button type="button" onclick="toggleMenu(this)"
-                            class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">
-                            <i class="fa-regular fa-user flex-center icon "></i>
-                            <span class="flex-1 ml-3 text-left whitespace-nowrap">Users</span>
-                            <i class="fa-solid fa-chevron-up text-[14px] transition-all rotate-180 px-1.5"></i>
-                        </button>
-                        <ul id="dropdown-layouts" class="hidden py-2 space-y-2">
-                            <li>
-                                <a href="{{ route('user.index') }}"
-                                    class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">User
-                                    lists</a>
-                            </li>
-                            <li>
-                                <a href=""
-                                    class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Suspended
-                                    users</a>
-                            </li>
-                        </ul>
-                    </li>
+                    @if(hasAccess(auth()->user()->roles, ['manage_users']))
+                        <li>
+                            <button type="button" onclick="toggleMenu(this)"
+                                class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">
+                                <i class="fa-regular fa-user flex-center icon "></i>
+                                <span class="flex-1 ml-3 text-left whitespace-nowrap">Users</span>
+                                <i class="fa-solid fa-chevron-up text-[14px] transition-all rotate-180 px-1.5"></i>
+                            </button>
+                            <ul id="dropdown-layouts" class="hidden py-2 space-y-2">
+                                <li>
+                                    <a href="{{ route('user.index') }}"
+                                        class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">User
+                                        lists</a>
+                                </li>
+                                <li>
+                                    <a href=""
+                                        class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Suspended
+                                        users</a>
+                                </li>
+                            </ul>
+                        </li>
+                    @endif 
+
+                    @if(hasAccess(auth()->user()->roles, ['manage_categories']))
                     <li>
                         <button type="button" onclick="toggleMenu(this)"
                             class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700"
@@ -76,6 +80,9 @@
                             </li>
                         </ul>
                     </li>
+                    @endif
+
+                    @if(hasAccess(auth()->user()->roles, ['manage_pages']))
 
                     <li>
                         <button type="button" onclick="toggleMenu(this)"
@@ -111,6 +118,9 @@
                             </li>
                         </ul>
                     </li>
+                    @endif
+
+                    @if(hasAccess(auth()->user()->roles, ['manage_auth']))
                     <li>
                         <button type="button" onclick="toggleMenu(this)"
                             class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700"
@@ -153,7 +163,9 @@
                             </li>
                         </ul>
                     </li>
+                    @endif
 
+                    @if(hasAccess(auth()->user()->roles, ['manage_roles']))
                     <li>
                         
                         <button type="button" onclick="toggleMenu(this)"
@@ -180,6 +192,9 @@
                             
                         </ul>
                     </li>
+                    @endif
+
+                    @if(hasAccess(auth()->user()->roles, ['manage_settings']))
                     <li>
                         <a href="{{ route('settings.index') }}"
                             class="flex items-center p-2 text-base text-gray-900 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700   dark:bg-gray-700 ">
@@ -193,6 +208,7 @@
                             <span class="ml-3" sidebar-toggle-item>Settings</span>
                         </a>
                     </li>
+                    @endif
                 </ul>
 
             </div>

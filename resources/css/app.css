@@ -18,6 +18,10 @@
     @apply px-5 py-2 text-base font-medium text-center text-white bg-sky-500 rounded hover:bg-sky-600 focus:ring-4 focus:ring-blue-300;
 }
 
+.btn-dark {
+    @apply px-6 py-2 bg-gray-800 text-white rounded hover:bg-slate-900
+}
+
 .btn-sm {
     @apply px-2.5 py-1.5 text-xs font-medium text-center text-white bg-blue-500 rounded hover:bg-blue-600 focus:ring-4 focus:ring-blue-300;
 }
