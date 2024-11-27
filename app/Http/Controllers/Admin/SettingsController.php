@@ -25,7 +25,7 @@ class SettingsController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:50',
-            'email' => 'required|email|unique:users,email,' . auth()->id(),
+            'email' => 'required|email|unique:users,email,' . Auth::id(),
             'profile' => 'nullable|mimes:jpg,png,gif,jpeg,webp|max:2048'
         ]);
 

@@ -1,6 +1,7 @@
 @extends('admin.layouts.app')
 
 @section('header')
+    <link rel="stylesheet" href="{{ asset('style/select2.min.css') }}">
 @endsection
 
 @section('contents')
@@ -34,7 +35,7 @@
                                             clip-rule="evenodd"></path>
                                     </svg>
                                     <a href="#"
-                                        class="ml-1 text-gray-700 hover:text-primary-600 md:ml-2 dark:text-gray-300 dark:hover:text-white">Permission</a>
+                                        class="ml-1 text-gray-700 hover:text-primary-600 md:ml-2 dark:text-gray-300 dark:hover:text-white">User</a>
                                 </div>
                             </li>
                             <li>
@@ -51,27 +52,68 @@
                             </li>
                         </ol>
                     </nav>
-                    <h1 class="text-xl px-4 font-semibold text-gray-900 sm:text-2xl dark:text-white">Create permission</h1>
+                    <h1 class="text-xl px-4 font-semibold text-gray-900 sm:text-2xl dark:text-white">Create user</h1>
                 </div>
 
 
                 <div class="p-6 space-y-6">
-                    <form id="PermissionForm">
+                    <form id="UserForm" enctype="multipart/form-data">
                         <div class="grid grid-cols-6 gap-6">
-                            <div class="col-span-12">
+                            <div class="col-span-6 sm:col-span-3">
                                 <label for="name"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
                                 <input type="text" name="name" value="" id="name"
                                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-sky-500 dark:focus:border-sky-500"
-                                    placeholder="Staff">
+                                    placeholder="Name">
+                            </div>
+
+                            <div class="col-span-6 sm:col-span-3">
+                                <label for="email"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                                <input type="text" name="email" value="" id="email"
+                                    class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-sky-500 dark:focus:border-sky-500"
+                                    placeholder="Email">
+                            </div>
+
+
+                            <div class="col-span-6 sm:col-span-3">
+                                <label for="password"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                                <input type="text" name="password" value="" id="password"
+                                    class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-sky-500 dark:focus:border-sky-500"
+                                    placeholder="Password">
+                            </div>
+
+                            <div class="col-span-6 sm:col-span-3">
+                                <label for="profile"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Profile
+                                    image</label>
+                                <input type="file" name="profile" value="" id="profile"
+                                    class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-sky-500 dark:focus:border-sky-500">
+                            </div>
+
+                            <div class="col-span-6 sm:col-span-3 w-full">
+                                <label for="roles"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select role</label>
+                                <select name="roles[]" class="w-full" id="roles" multiple>
+                                    @forelse ($roles as $role)
+                                        <option value="{{ $role->name }}">
+                                            {{ $role->name }}
+                                        </option>
+                                    @empty
+                                        <option selected disabled>No roles found</option>
+                                    @endforelse
+                                </select>
+
                             </div>
                         </div>
+
+                        <div class="col-span-6 flex justify-end items-end mt-6">
+                            <button class="btn w-[200px] text-center flex-center" type="submit" id="submitBtn">Create
+                                user</button>
+                        </div>
                 </div>
-                <div class="items-center p-6 border-t border-gray-200 rounded-b dark:border-gray-700">
-                    <button
-                        class="w-full flex-center text-white bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-sky-600 dark:hover:bg-sky-700 dark:focus:ring-sky-800"
-                        type="submit" id="submitBtn">Create permission</button>
-                </div>
+
                 </form>
             </div>
         </div>
@@ -84,18 +126,21 @@
 @endsection
 
 @section('script')
+    <script src="{{ asset('script/select2.full.min.js') }}"></script>
+
     <script>
         $(document).ready(function() {
+            $('#roles').select2();
 
 
-            $('#PermissionForm').on('submit', function(e) {
+            $('#UserForm').on('submit', function(e) {
                 e.preventDefault();
                 var submitBtn = $('#submitBtn');
                 $('.text-red-500').remove();
                 let formData = new FormData(this);
 
                 $.ajax({
-                    url: "{{ route('roles.storePermission') }}",
+                    url: "{{ route('roles.storeUser') }}",
                     beforeSend: function() {
                         submitBtn.prop('disabled', true);
                         submitBtn.html(loader)
@@ -106,7 +151,7 @@
                     contentType: false,
                     success: function(response) {
                         submitBtn.prop('disabled', false);
-                        submitBtn.html("Create permission");
+                        submitBtn.html("Create user");
                         if (response.status == 'success') {
                             notyf.success(response.data.message);
 
@@ -126,7 +171,7 @@
                     },
                     error: function(xhr) {
                         submitBtn.prop('disabled', false);
-                        submitBtn.html("Create permission");
+                        submitBtn.html("Create user");
 
                         let errors = xhr.responseJSON;
 

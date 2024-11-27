@@ -5,7 +5,7 @@
         class="relative flex flex-col flex-1 min-h-0 pt-0 bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700">
         <div class="flex flex-col flex-1 pt-5 pb-4 overflow-y-auto">
             <div class="flex-1 px-3 space-y-1 bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
-                <ul class="pb-2 space-y-2">
+                <ul class="pb-2 space-y-1">
                     <li>
                         <form action="#" method="GET" class="lg:hidden">
                             <label for="mobile-search" class="sr-only">Search</label>
@@ -43,7 +43,7 @@
                                 <span class="flex-1 ml-3 text-left whitespace-nowrap">Users</span>
                                 <i class="fa-solid fa-chevron-up text-[14px] transition-all rotate-180 px-1.5"></i>
                             </button>
-                            <ul id="dropdown-layouts" class="hidden py-2 space-y-2">
+                            <ul id="dropdown-layouts" class="hidden py-2 space-y-1">
                                 <li>
                                     <a href="{{ route('user.index') }}"
                                         class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">User
@@ -67,7 +67,7 @@
                             <span class="flex-1 ml-3 text-left whitespace-nowrap" sidebar-toggle-item>Categories</span>
                             <i class="fa-solid fa-chevron-up text-[14px] transition-all rotate-180 px-1.5"></i>
                         </button>
-                        <ul id="dropdown-crud" class="space-y-2 py-2 hidden ">
+                        <ul id="dropdown-crud" class="space-y-1 py-2 hidden ">
                             <li>
                                 <a href=""
                                     class="text-base text-gray-900 rounded-lg flex items-center p-2 group hover:bg-gray-100 transition duration-75 pl-11 dark:text-gray-200 dark:hover:bg-gray-700  dark:bg-gray-700 ">Category
@@ -97,7 +97,7 @@
                             <span class="flex-1 ml-3 text-left whitespace-nowrap" sidebar-toggle-item>Pages</span>
                             <i class="fa-solid fa-chevron-up text-[14px] transition-all rotate-180 px-1.5"></i>
                         </button>
-                        <ul id="dropdown-pages" class="hidden py-2 space-y-2">
+                        <ul id="dropdown-pages" class="hidden py-2 space-y-1">
                             <li>
                                 <a href="{{ route('pages.pricing') }}"
                                     class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Pricing</a>
@@ -135,7 +135,7 @@
                                 sidebar-toggle-item>Authentication</span>
                             <i class="fa-solid fa-chevron-up text-[14px] transition-all rotate-180 px-1.5"></i>
                         </button>
-                        <ul id="dropdown-auth" class="hidden py-2 space-y-2">
+                        <ul id="dropdown-auth" class="hidden py-2 space-y-1">
                             <li>
                                 <a href=""
                                     class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Sign
@@ -176,7 +176,7 @@
                             <i class="fa-solid fa-chevron-up text-[14px] transition-all rotate-180 px-1.5"></i>
                         </button>
 
-                        <ul id="dropdown-auth" class="hidden py-2 space-y-2">
+                        <ul id="dropdown-auth" class="hidden py-2 space-y-1">
                             <li>
                                 <a href="{{ route('roles.index') }}"
                                     class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Manage user roles</a>
@@ -188,6 +188,11 @@
                             <li>
                                 <a href="{{ route('roles.roles') }}"
                                     class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Manage roles</a>
+                            </li>
+
+                            <li>
+                                <a href="{{ route('roles.createUser') }}"
+                                    class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Create user</a>
                             </li>
                             
                         </ul>

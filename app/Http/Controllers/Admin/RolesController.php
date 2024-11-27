@@ -14,7 +14,8 @@ class RolesController extends Controller
 {
     public function index(Request $request)
     {
-        $users = User::latest();
+        $users = User::whereHas('roles');
+
         $search = '';
         if ($request->has('search') && $request->search) {
             $search = $request->search;
@@ -239,4 +240,52 @@ class RolesController extends Controller
             'redirect' => route('roles.roles'),
         ], 'success', 200);
     }
+
+    public function createUser(){
+        $roles = Role::all();
+        $permissions = Permission::all();
+
+        return view('admin.roles.user_create', compact('roles','permissions'));
+    }
+
+    public function storeUser(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:6',
+            'profile' => 'nullable|mimes:jpg,png,gif,jpeg,webp|max:2048',
+            'roles' => 'required|array',
+            'roles.*' => 'exists:roles,name'
+        ]);
+
+        if ($validator->fails()) {
+            return responseJson([
+                'errors' => $validator->errors(),
+            ], 'error', 422);
+        }
+
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->uid = generateUid();
+        $user->password = bcrypt($request->password);
+
+        if ($request->hasFile('profile')) {
+            $image = $request->file('profile');
+            $filePath = 'uploads/profiles';
+            $imagePath = saveImage($image, $filePath);
+
+            $user->profile = $imagePath;
+        }
+
+        $user->save();
+        $user->assignRole($request->roles);
+
+        return responseJson([
+            'message' => 'User created successfully!',
+            'redirect' => route('roles.index'),
+        ], 'success', 200);
+    }
+
 }

@@ -87,6 +87,35 @@
                                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             </div>
 
+                            <div class="col-span-6 sm:col-span-3">
+                                <label for="country"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Roles</label>
+                                <div class="flex gap-1.5 flex-wrap">
+                                    @forelse (auth()->user()->roles as $role)
+                                        <span class="badge badge-blue">{{ $role->name }}</span>
+                                    @empty 
+                                        <span class="badge badge-green">Default</span>
+                                    @endforelse
+                                </div>
+                            </div>
+
+                            <div class="col-span-6 sm:col-span-3">
+                                <label for="country"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Permissions</label>
+                                <div class="flex gap-1.5 flex-wrap">
+                                    @forelse (auth()->user()->roles as $role)
+                                        
+                                        @forelse ($role->permissions as $permission)
+                                        <span class="badge badge-blue">{{ $permission->name }}</span>
+                                        @empty
+                                            <span class="badge badge-green">Default</span>
+                                        @endforelse
+                                    @empty 
+                                    
+                                    @endforelse
+                                </div>
+                            </div>
+
                         </div>
                         <button
                             class="mt-5 w-full flex-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"

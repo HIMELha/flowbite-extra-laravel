@@ -40,15 +40,20 @@ Route::group(['middleware' => AdminAuth::class, 'prefix' => 'dashboard'], functi
         Route::get('/', 'index')->name('index');
         Route::get('/edit/{id}', 'edit')->name('edit');
         Route::post('/update/{id}', 'update')->name('update');
+
         Route::get('/permissions', 'permissions')->name('permissions');
         Route::get('/permission/create', 'createPermission')->name('createPermission');
         Route::post('/permission/store', 'storePermission')->name('storePermission');
         Route::get('/permission/edit/{id}', 'editPermission')->name('editPermission');
         Route::post('/permission/update/{id}', 'updatePermission')->name('updatePermission');
         Route::get('/permission/delete/{id}', 'deletePermission')->name('deletePermission');
+
         Route::get('/roles', 'roles')->name('roles');
         Route::get('/role/edit/{id}', 'editRole')->name('editRole');
         Route::post('/role/update/{id}', 'updateRole')->name('updateRole');
+
+        Route::get('/user/create', 'createUser')->name('createUser');
+        Route::post('/user/store', 'storeUser')->name('storeUser');
     });
 
     Route::group(['middleware' => ['role:super_admin']], function () {
