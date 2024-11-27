@@ -1,6 +1,7 @@
 <?php
 
 use Spatie\Permission\Models\Role;
+use App\Models\Setting;
 use Spatie\Permission\Models\Permission;
 
 function responseJson($array, $status, $statusCode)
