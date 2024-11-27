@@ -73,3 +73,10 @@ function hasAccess($roles, $permissions)
 
     return false;
 }
+
+
+function setting($key){
+    $setting = Setting::firstOrFail();
+
+    return $setting->$key;
+}

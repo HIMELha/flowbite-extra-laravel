@@ -17,10 +17,15 @@
                             clip-rule="evenodd"></path>
                     </svg>
                 </button>
-                <a href="" class="flex ml-2 md:mr-24">
-                    <img src="https://flowbite.com/images/logo.svg" class="h-8 mr-3" alt="FlowBite Logo" />
+                <a href="{{ route('dashboard.index') }}" class="flex ml-2 md:mr-24">
+
+                    @if(fileExists(setting('site_logo')))
+                        <img src="{{ asset(setting('site_logo')) }}" alt="site logo" class="w-10 h-auto">
+                    @else
+                        <img src="{{ asset('images/site_logo.svg') }}" alt="site logo" class="w-10 h-auto">
+                    @endif
                     <span
-                        class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">Flowbite</span>
+                        class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">{{ setting('site_name') }}</span>
                 </a>
                 <form action="#" method="GET" class="hidden lg:block lg:pl-3.5">
                     <label for="topbar-search" class="sr-only">Search</label>

@@ -53,6 +53,7 @@ Route::group(['middleware' => AdminAuth::class, 'prefix' => 'dashboard'], functi
 
     Route::group(['middleware' => ['role:super_admin']], function () {
         Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
+        Route::post('/setting/update', [SettingsController::class, 'update'])->name('settings.update');
     });
 
     Route::get('/profile', [SettingsController::class, 'profile'])->name('dashboard.profile');
