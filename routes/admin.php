@@ -36,6 +36,12 @@ Route::group(['middleware' => AdminAuth::class, 'prefix' => 'dashboard'], functi
         Route::get('500', 'fivezerozero')->name('fivezerozero');
     });
 
+    Route::group(['controller' => AuthController::class, 'as' => 'auth.', 'prefix' => 'auth', 'middleware' => ['permission:manage_auth']], function () {
+        Route::get('/forget-password', 'forget')->name('forget');
+        Route::get('/reset-password', 'reset')->name('reset');
+        Route::get('/profile-lock', 'lock')->name('lock');
+    });
+
     Route::group(['controller' => RolesController::class, 'as' => 'roles.', 'prefix' => 'roles', 'middleware' => ['permission:manage_roles']], function () {
         Route::get('/', 'index')->name('index');
         Route::get('/edit/{id}', 'edit')->name('edit');

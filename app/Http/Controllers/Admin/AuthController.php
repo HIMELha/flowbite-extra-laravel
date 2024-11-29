@@ -42,14 +42,24 @@ class AuthController extends Controller
             ], 'success', 200);
         } else {
             return responseJson([
-                'error' => 'You need to be an admin to access admin dashboard'
+                'error' => 'You need a valid role to access admin dashboard'
             ], 'error', 403);
         }
     }
 
+    public function forget()
+    {
+        return view('admin.auth.forget');
+    }
+
     public function reset()
     {
-        return view('admin.auth.login');
+        return view('admin.auth.reset');
+    }
+
+    public function lock()
+    {
+        return view('admin.auth.lock');
     }
 
     public function logout(){

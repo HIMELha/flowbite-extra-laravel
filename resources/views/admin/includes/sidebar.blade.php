@@ -136,28 +136,19 @@
                             <i class="fa-solid fa-chevron-up text-[14px] transition-all rotate-180 px-1.5"></i>
                         </button>
                         <ul id="dropdown-auth" class="hidden py-2 space-y-1">
+                            
                             <li>
-                                <a href=""
-                                    class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Sign
-                                    in</a>
-                            </li>
-                            <li>
-                                <a href=""
-                                    class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Sign
-                                    up</a>
-                            </li>
-                            <li>
-                                <a href=""
+                                <a href="{{ route('auth.forget') }}"
                                     class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Forgot
                                     password</a>
                             </li>
                             <li>
-                                <a href=""
+                                <a href="{{ route('auth.reset') }}"
                                     class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Reset
                                     password</a>
                             </li>
                             <li>
-                                <a href=""
+                                <a href="{{ route('auth.lock') }}"
                                     class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Profile
                                     lock</a>
                             </li>
