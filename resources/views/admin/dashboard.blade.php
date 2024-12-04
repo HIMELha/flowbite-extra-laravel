@@ -1,6 +1,7 @@
 @extends('admin.layouts.app')
 
 @section('header')
+    <script src="{{ asset('style/apexcharts.min.css') }}"></script>
 @endsection
 
 @section('contents')
@@ -565,7 +566,8 @@
                                         class="inline-flex items-center mr-3 text-sm font-semibold text-gray-900 dark:text-white">
                                         <img class="w-6 h-6 mr-2 rounded-full"
                                             src="https://flowbite.com/docs/images/people/profile-picture-2.jpg"alt="Michael Gough">Michael
-                                        Gough</p>
+                                        Gough
+                                    </p>
                                     <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate
                                             datetime="2022-02-08" title="February 8th, 2022"> 01/03/2023 4:15 PM</time>
                                     </p>
@@ -626,7 +628,8 @@
                                         class="inline-flex items-center mr-3 text-sm font-semibold text-gray-900 dark:text-white">
                                         <img class="w-6 h-6 mr-2 rounded-full"
                                             src="https://flowbite.com/docs/images/people/profile-picture-3.jpg"
-                                            alt="Bonnie avatar">Bonnie Green</p>
+                                            alt="Bonnie avatar">Bonnie Green
+                                    </p>
                                     <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate
                                             datetime="2022-02-08" title="February 8th, 2022"> 01/03/2023 4:15 PM</time>
                                     </p>
@@ -766,7 +769,8 @@
                                         class="inline-flex items-center mr-3 text-sm font-semibold text-gray-900 dark:text-white">
                                         <img class="w-6 h-6 mr-2 rounded-full"
                                             src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"alt="Jese avatar">Jese
-                                        Leos</p>
+                                        Leos
+                                    </p>
                                     <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate
                                             datetime="2022-02-08" title="February 8th, 2022"> 01/03/2023 4:15 PM</time>
                                     </p>
@@ -903,7 +907,8 @@
                                         class="inline-flex items-center mr-3 text-sm font-semibold text-gray-900 dark:text-white">
                                         <img class="w-6 h-6 mr-2 rounded-full"
                                             src="https://flowbite.com/docs/images/people/profile-picture-1.jpg"alt="Joseph avatar">Joseph
-                                        McFallen</p>
+                                        McFallen
+                                    </p>
                                     <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate
                                             datetime="2022-02-08" title="February 8th, 2022"> 01/03/2023 4:15 PM</time>
                                     </p>
@@ -952,7 +957,8 @@
                                         class="inline-flex items-center mr-3 text-sm font-semibold text-gray-900 dark:text-white">
                                         <img class="w-6 h-6 mr-2 rounded-full"
                                             src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"alt="Jese avatar">Jese
-                                        Leos</p>
+                                        Leos
+                                    </p>
                                     <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate
                                             datetime="2022-02-08" title="February 8th, 2022"> 01/03/2023 4:15 PM</time>
                                     </p>
@@ -2274,4 +2280,82 @@
 
 
 @section('script')
+    <script src="{{ asset('script/apexcharts.min.js') }}"></script>
+
+    <script>
+        var dates = [
+            ['2024-12-01T00:00:00.000Z', 1200000],
+            ['2024-12-02T00:00:00.000Z', 1400000],
+            ['2024-12-03T00:00:00.000Z', 1500000],
+            ['2024-12-04T00:00:00.000Z', 1700000],
+            ['2024-12-05T00:00:00.000Z', 1600000],
+            ['2024-12-06T00:00:00.000Z', 1900000],
+            ['2024-12-07T00:00:00.000Z', 2100000]
+        ];
+
+        var options = {
+            series: [{
+                name: 'Sales',
+                data: dates
+            }],
+            chart: {
+                type: 'area',
+                stacked: false,
+                height: 350,
+                zoom: {
+                    type: 'x',
+                    enabled: true,
+                    autoScaleYaxis: true
+                },
+                toolbar: {
+                    autoSelected: 'zoom'
+                }
+            },
+            dataLabels: {
+                enabled: false
+            },
+            markers: {
+                size: 0,
+            },
+            title: {
+                text: 'Sales history',
+                align: 'left'
+            },
+            fill: {
+                type: 'gradient',
+                gradient: {
+                    shadeIntensity: 1,
+                    inverseColors: false,
+                    opacityFrom: 0.5,
+                    opacityTo: 0,
+                    stops: [0, 90, 100]
+                },
+            },
+            yaxis: {
+                labels: {
+                    formatter: function(val) {
+                        return (val / 1000000).toFixed(0) + "M";
+                    },
+                },
+                title: {
+                    text: 'Price'
+                },
+            },
+            xaxis: {
+                type: 'datetime',
+            },
+            tooltip: {
+                shared: false,
+                y: {
+                    formatter: function(val) {
+                        return (val / 1000000).toFixed(0) + "M";
+                    }
+                }
+            }
+        };
+
+        var chart = new ApexCharts(document.querySelector("#main-chart"), options);
+        chart.render();
+        
+    </script>
 @endsection
