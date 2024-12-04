@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PagesController;
 use App\Http\Controllers\Admin\SettingsController;
@@ -27,6 +28,13 @@ Route::group(['middleware' => AdminAuth::class, 'prefix' => 'dashboard'], functi
         Route::post('update/{id}', 'update')->name('update');
         Route::get('delete/{id}', 'delete')->name('delete');
     });
+
+    Route::group(['controller' => CategoryController::class, 'as' => 'category.', 'prefix' => 'categories', 'middleware' => ['permission:manage_categories']], function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('create', 'create')->name('create');
+        Route::get('store', 'store')->name('store');
+    });
+
 
     Route::group(['controller' => PagesController::class, 'as' => 'pages.', 'prefix' => 'pages', 'middleware' => ['permission:manage_pages']], function () {
         Route::get('/', 'index')->name('index');
@@ -71,3 +79,4 @@ Route::group(['middleware' => AdminAuth::class, 'prefix' => 'dashboard'], functi
     Route::post('/profile/update', [SettingsController::class, 'updateProfile'])->name('dashboard.updateProfile');
     Route::post('/password/update', [SettingsController::class, 'updatePassword'])->name('dashboard.updatePassword');
 });
+
