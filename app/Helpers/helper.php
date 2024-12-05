@@ -85,3 +85,9 @@ function generateUid($length = 8)
 {
     return substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, $length);
 }
+
+
+function routeInArray($routes)
+{
+    return in_array(Route::currentRouteName(), $routes);
+}
