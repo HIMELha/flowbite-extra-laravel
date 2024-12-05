@@ -13,7 +13,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $users = User::latest();
-        $search = ''; 
+        $search = '';
         if ($request->has('search') && $request->search) {
             $search = $request->search;
             $users->where(function ($query) use ($search) {
@@ -70,9 +70,11 @@ class UserController extends Controller
             $user->password = $request->input('password');
         }
 
-        deleteOldImage($user->profile);
+
 
         if ($request->hasFile('profile')) {
+            deleteOldImage($user->profile);
+
             $image = $request->file('profile');
             $filePath = 'uploads/profiles';
             $imagePath = saveImage($image, $filePath);
@@ -96,6 +98,12 @@ class UserController extends Controller
             session()->flash('error', 'User not found');
             return redirect()->back();
         }
+
+        if (in_array('super_admin', $user->roles->pluck('name')->toArray())) {
+            session()->flash('error', 'Action unavailable');
+            return redirect()->back();
+        }
+
 
         $user->delete();
         session()->flash('success', 'User has been deleted');

@@ -61,14 +61,14 @@
                             <div class="col-span-6 sm:col-span-3">
                                 <label for="name"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
-                                <input type="text" name="name" value="Bonnie" id="name"
+                                <input type="text" name="name" value="{{ $user->name }}" id="name"
                                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-sky-500 dark:focus:border-sky-500"
-                                    placeholder="Bonnie">
+                                    placeholder="Your name">
                             </div>
                             <div class="col-span-6 sm:col-span-3">
                                 <label for="email"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-                                <input type="email" name="email" value="bonnie@flowbite.com" id="email"
+                                <input type="email" name="email" value="{{ $user->email }}" id="email"
                                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-sky-500 dark:focus:border-sky-500"
                                     placeholder="example@company.com">
                             </div>
@@ -127,9 +127,7 @@
                     url: "{{ route('user.update', $user->id) }}",
                     beforeSend: function() {
                         submitBtn.prop('disabled', true);
-                        submitBtn.html(
-                            `<div class="w-5 h-5 border-2 border-dashed rounded-full animate-spin border-white"></div>`
-                        )
+                        submitBtn.html(loader)
                     },
                     type: 'POST',
                     data: formData,

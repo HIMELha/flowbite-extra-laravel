@@ -175,9 +175,7 @@
                     url: "{{ route('dashboard.updateProfile') }}",
                     beforeSend: function() {
                         submitBtn.prop('disabled', true);
-                        submitBtn.html(
-                            `<div class="w-5 h-5 border-2 border-dashed rounded-full animate-spin border-white"></div>`
-                        )
+                        submitBtn.html(loader)
                     },
                     type: 'POST',
                     data: formData,
@@ -219,9 +217,7 @@
                     url: "{{ route('dashboard.updatePassword') }}", // Ensure this route is defined in your Laravel app
                     beforeSend: function() {
                         submitBtn.prop('disabled', true);
-                        submitBtn.html(
-                            `<div class="w-5 h-5 border-2 border-dashed rounded-full animate-spin border-white"></div>`
-                        );
+                        submitBtn.html(loader);
                     },
                     type: 'POST',
                     data: formData,
