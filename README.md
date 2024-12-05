@@ -2,7 +2,7 @@
 
 Flowbite Extra is an open-source admin dashboard that will help you build your Laravel project faster.
 
-![Admin Dashboard](https://i.ibb.co/m084cGc/image.png)
+![Admin Dashboard](https://i.ibb.co.com/2nHN2PP/admindashboard1.png)
 
 ## Features
 - Built with Laravel
