@@ -18,16 +18,29 @@
     @endif
 </head>
 
-<body class="w-full h-screen flex-center flex-col gap-3">
+<body class="w-full h-auto my-20 flex-center flex-col gap-4">
     <h2 class="text-3xl font-medium text-slate-800">Flowbite Extra Admin Dashboard</h2>
 
-    <div class="flex-center gap-4  mt-16">
+    <div class="flex-center gap-4  mt-8 mb-5">
         <a href="{{ route('dashboard.index') }}" class="btn">View demo</a>
-        <a href="" class="btn-outline">Buy a license</a>
-        <a href="" class="btn-outline">Give a star</a>
+        <a href="https://github.com/HIMELha/flowbite-extra-laravel" class="btn-outline">Give a star</a>
     </div>
 
-    <div class="flex flex-col mt-2 items-center">
+    <div class="flex flex-col max-w-[1000px] mx-auto gap-3">
+        <h2 class="text-2xl font-medium text-center">Screenshots</h2>
+
+        <img src="{{ asset('images/admindashboard1.png') }}" alt="Laravel admin dashboard" class="px-3 rounded-lg border">
+
+        <img src="{{ asset('images/admindashboard2.png') }}" alt="Laravel admin dashboard" class="px-3 rounded-lg border">
+
+        <img src="{{ asset('images/admindashboard3.png') }}" alt="Laravel admin dashboard" class="px-3 rounded-lg border">
+
+        <img src="{{ asset('images/admindashboard4.png') }}" alt="Laravel admin dashboard" class="px-3 rounded-lg border">
+
+        <img src="{{ asset('images/admindashboard5.png') }}" alt="Laravel admin dashboard" class="px-3 rounded-lg border">
+    </div>
+
+    <div class="flex flex-col mt-10 items-center">
         <span>Extended version of flowbite admin dashboard template</span>
         <p>All rights are reserved by Himel Hasan</p>
     </div>
