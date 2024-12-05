@@ -11,11 +11,8 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-    <!-- Styles / Scripts -->
-    @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    @else
-    @endif
+    {{-- @vite('resources/css/app.css') --}}
+    <link rel="stylesheet" href="{{ asset('build/assets/app-DaOtJSVt.css') }}">
 </head>
 
 <body class="w-full h-auto my-20 flex-center flex-col gap-4">
@@ -29,15 +26,20 @@
     <div class="flex flex-col max-w-[1000px] mx-auto gap-3">
         <h2 class="text-2xl font-medium text-center">Screenshots</h2>
 
-        <img src="{{ asset('images/admindashboard1.png') }}" alt="Laravel admin dashboard" class="px-3 rounded-lg border">
+        <img src="{{ asset('images/admindashboard1.png') }}" alt="Laravel admin dashboard"
+            class="px-3 rounded-lg border">
 
-        <img src="{{ asset('images/admindashboard2.png') }}" alt="Laravel admin dashboard" class="px-3 rounded-lg border">
+        <img src="{{ asset('images/admindashboard2.png') }}" alt="Laravel admin dashboard"
+            class="px-3 rounded-lg border">
 
-        <img src="{{ asset('images/admindashboard3.png') }}" alt="Laravel admin dashboard" class="px-3 rounded-lg border">
+        <img src="{{ asset('images/admindashboard3.png') }}" alt="Laravel admin dashboard"
+            class="px-3 rounded-lg border">
 
-        <img src="{{ asset('images/admindashboard4.png') }}" alt="Laravel admin dashboard" class="px-3 rounded-lg border">
+        <img src="{{ asset('images/admindashboard4.png') }}" alt="Laravel admin dashboard"
+            class="px-3 rounded-lg border">
 
-        <img src="{{ asset('images/admindashboard5.png') }}" alt="Laravel admin dashboard" class="px-3 rounded-lg border">
+        <img src="{{ asset('images/admindashboard5.png') }}" alt="Laravel admin dashboard"
+            class="px-3 rounded-lg border">
     </div>
 
     <div class="flex flex-col mt-10 items-center">
