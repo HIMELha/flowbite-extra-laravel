@@ -17,9 +17,9 @@ class DatabaseSeeder extends Seeder
         User::factory(10)->create();
 
         Setting::create([
-            'site_name' => 'My Awesome Website',
-            'site_title' => 'Welcome to My Awesome Website',
-            'site_logo' => 'logo.png',
+            'site_name' => 'Flowbite',
+            'site_title' => 'Welcome to Flowbite Extra Laravel',
+            'site_logo' => 'uploads/settings/1733384892_67515abce08cf.png',
             'site_description' => 'This is the best website for amazing content.',
             'contact_info' => 'contact@myawesomewebsite.com',
             'facebook_link' => 'https://facebook.com/myawesomewebsite',

@@ -29,11 +29,15 @@ Route::group(['middleware' => AdminAuth::class, 'prefix' => 'dashboard'], functi
         Route::get('delete/{id}', 'delete')->name('delete');
     });
 
-    Route::group(['controller' => CategoryController::class, 'as' => 'category.', 'prefix' => 'categories', 'middleware' => ['permission:manage_categories']], function () {
+    Route::group(['controller' => CategoryController::class, 'as' => 'categories.', 'prefix' => 'categories', 'middleware' => ['permission:manage_categories']], function () {
         Route::get('/', 'index')->name('index');
         Route::get('create', 'create')->name('create');
-        Route::get('store', 'store')->name('store');
+        Route::post('store', 'store')->name('store');
+        Route::get('edit/{category}', 'edit')->name('edit');
+        Route::post('update/{category}', 'update')->name('update');
+        Route::get('destroy/{category}', 'destroy')->name('destroy');
     });
+
 
 
     Route::group(['controller' => PagesController::class, 'as' => 'pages.', 'prefix' => 'pages', 'middleware' => ['permission:manage_pages']], function () {
@@ -79,4 +83,3 @@ Route::group(['middleware' => AdminAuth::class, 'prefix' => 'dashboard'], functi
     Route::post('/profile/update', [SettingsController::class, 'updateProfile'])->name('dashboard.updateProfile');
     Route::post('/password/update', [SettingsController::class, 'updatePassword'])->name('dashboard.updatePassword');
 });
-
