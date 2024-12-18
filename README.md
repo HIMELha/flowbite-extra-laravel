@@ -46,12 +46,18 @@ Ensure you have the following installed:
    ```bash
     php artisan migrate
 
-6. **Serve the Application Start the development server**
+6. **Run database seeding**
+   ```bash
+    php artisan db:seed
+
+7. **Serve the Application Start the development server**
    ```bash
     php artisan serve
 
     npm run dev
 
+
+### Welldone 👍. You're ready to go with your own customization
 
 ## License
 
