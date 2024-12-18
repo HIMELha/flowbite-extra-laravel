@@ -212,7 +212,6 @@
 
 
                     @if (hasAccess(auth()->user()->roles, ['manage_settings']))
-                        
                         <li>
                             <a href="{{ route('settings.index') }}"
                                 class="flex items-center p-2 text-base text-gray-800 rounded hover:bg-slate-800 hover:text-white {{ routeInArray(['settings.index']) == true ? 'bg-slate-800 text-white' : '' }} group">

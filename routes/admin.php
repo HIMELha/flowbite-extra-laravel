@@ -74,7 +74,7 @@ Route::group(['middleware' => AdminAuth::class, 'prefix' => 'dashboard'], functi
         Route::post('/user/store', 'storeUser')->name('storeUser');
     });
 
-    Route::group(['middleware' => ['role:super_admin']], function () {
+    Route::group(['middleware' => ['permission:manage_settings']], function () {
         Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
         Route::post('/setting/update', [SettingsController::class, 'update'])->name('settings.update');
     });

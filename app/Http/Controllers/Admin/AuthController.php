@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\User; // Update this if your User model is in another namespace
+use App\Models\User;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -35,7 +35,7 @@ class AuthController extends Controller
             ], 'error', 401);
         }
 
-        if (Auth::user()->hasRole(['super_admin', 'admin', 'moderator', 'customer_support', 'finance_manager', 'manager'])) {
+        if (Auth::user()->hasRole(['superadmin', 'staff', 'admin', 'moderator', 'customersupport', 'financemanager', 'manager'])) {
             return responseJson([
                 'message' => 'Login attempt success',
                 'redirect' => route('dashboard.index')
@@ -62,7 +62,8 @@ class AuthController extends Controller
         return view('admin.auth.lock');
     }
 
-    public function logout(){
+    public function logout()
+    {
         Auth::logout();
 
         return redirect()->route('dashboard.login');

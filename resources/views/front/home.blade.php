@@ -12,11 +12,11 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
     {{-- @vite('resources/css/app.css') --}}
-    <link rel="stylesheet" href="{{ asset('build/assets/app-DaOtJSVt.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/assets/app-D2h36hjG.css') }}">
 </head>
 
 <body class="w-full h-auto my-20 flex-center flex-col gap-4">
-    <h2 class="text-3xl font-medium text-slate-800">Flowbite Extra Admin Dashboard</h2>
+    <h2 class="text-3xl font-medium text-center text-slate-800">Flowbite Extra Admin Dashboard</h2>
 
     <div class="flex-center gap-4  mt-8 mb-5">
         <a href="{{ route('dashboard.index') }}" class="btn">View demo</a>
@@ -42,9 +42,9 @@
             class="px-3 rounded-lg border">
     </div>
 
-    <div class="flex flex-col mt-10 items-center">
-        <span>Extended version of flowbite admin dashboard template</span>
-        <p>All rights are reserved by Himel Hasan</p>
+    <div class="flex flex-col justify-center mt-10 items-center">
+        <span class="text-center">Extended version of flowbite admin dashboard template</span>
+        <p class="text-center">All rights are reserved by Himel Hasan</p>
     </div>
 </body>
 

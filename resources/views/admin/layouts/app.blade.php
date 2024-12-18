@@ -11,7 +11,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     {{-- @vite('resources/css/app.css') --}}
-    <link rel="stylesheet" href="{{ asset('build/assets/app-DaOtJSVt.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/assets/app-D2h36hjG.css') }}">
 
     <link rel="stylesheet" href="{{ asset('style/notify.min.css') }}">
     @yield('header')

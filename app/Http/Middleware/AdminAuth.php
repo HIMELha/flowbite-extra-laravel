@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class AdminAuth
@@ -15,7 +16,7 @@ class AdminAuth
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (auth()->check() && auth()->user()->hasRole(['super_admin', 'admin', 'moderator', 'customer_support', 'finance_manager', 'manager'])) {
+        if (Auth::check() && Auth::user()->hasRole(['superadmin', 'admin', 'moderator', 'customersupport', 'financemanager', 'manager', 'staff'])) {
             return $next($request);
         }
 
